@@ -1,6 +1,6 @@
 use crossbeam_channel::select;
-use lsp_server::Connection;
-use lsp_types::{notification::Notification, request};
+use lsp_server::{Connection, Message, Notification, Request, Response};
+use lsp_types::notification::Notification as LspTypesNotification;
 
 use crate::{flags, utils};
 
@@ -42,17 +42,17 @@ impl EventLoop {
 
 #[derive(Debug)]
 pub enum Event {
-    LspRequest(lsp_server::Request),
-    LspResponse(lsp_server::Response),
-    LspNotification(lsp_server::Notification),
+    LspRequest(Request),
+    LspResponse(Response),
+    LspNotification(Notification),
 }
 
 impl Event {
-    pub fn from_lsp_msg(msg: lsp_server::Message) -> Event {
+    pub fn from_lsp_msg(msg: Message) -> Event {
         match msg {
-            lsp_server::Message::Request(inner) => Event::LspRequest(inner),
-            lsp_server::Message::Response(inner) => Event::LspResponse(inner),
-            lsp_server::Message::Notification(inner) => Event::LspNotification(inner),
+            Message::Request(inner) => Event::LspRequest(inner),
+            Message::Response(inner) => Event::LspResponse(inner),
+            Message::Notification(inner) => Event::LspNotification(inner),
         }
     }
 

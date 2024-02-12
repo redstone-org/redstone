@@ -1,11 +1,27 @@
-use lsp_types::ServerCapabilities;
+use lsp_types::{
+    HoverProviderCapability, SaveOptions, ServerCapabilities, TextDocumentSyncCapability,
+    TextDocumentSyncKind, TextDocumentSyncOptions,
+};
 
 pub fn server_capabilities() -> ServerCapabilities {
     ServerCapabilities {
         position_encoding: None,
-        text_document_sync: None,
+        text_document_sync: Some(TextDocumentSyncCapability::Options(
+            TextDocumentSyncOptions {
+                open_close: Some(true),
+                change: Some(TextDocumentSyncKind::INCREMENTAL),
+                will_save: None,
+                will_save_wait_until: None,
+                save: Some(
+                    SaveOptions {
+                        include_text: Some(false),
+                    }
+                    .into(),
+                ),
+            },
+        )),
         selection_range_provider: None,
-        hover_provider: Some(lsp_types::HoverProviderCapability::Simple(true)),
+        hover_provider: Some(HoverProviderCapability::Simple(true)),
         completion_provider: None,
         signature_help_provider: None,
         definition_provider: None,

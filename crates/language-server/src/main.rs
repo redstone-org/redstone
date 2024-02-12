@@ -6,8 +6,8 @@ use lsp_types::InitializeParams;
 
 mod capabilities;
 mod event_loop;
-mod file_service;
 mod flags;
+mod fs_service;
 mod handers;
 mod utils;
 
