@@ -3,7 +3,7 @@ xflags::xflags! {
 
     cmd xtask {
         cmd generate-ast {
-            optional --version
+            optional --dry-run
         }
     }
 }
@@ -22,7 +22,7 @@ pub enum XtaskCmd {
 
 #[derive(Debug)]
 pub struct GenerateAst {
-    pub version: bool,
+    pub dry_run: bool,
 }
 
 impl Xtask {

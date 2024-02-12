@@ -3,4 +3,13 @@ members = ["crates/*", "xtask"]
 resolver = "2"
 
 [workspace.dependencies]
+# local
+sourcegen = { path = "./crates/sourcegen", version = "0.1.0" }
+syntax = { path = "./crates/syntax", version = "0.1.0" }
+
+
+# non-local
 xflags = "0.3.2"
+quote = "1.0"
+proc-macro2 = "1.0"
+xshell = "0.2.5"
