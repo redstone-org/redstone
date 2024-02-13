@@ -1,1 +1,98 @@
-Name = 'ident' | 'self'
+// Java Un-Grammar.
+// Currently incomplete.
+// Based on https://docs.oracle.com/javase/specs/jls/se21/html/jls-19.html
+
+// Types and Values
+
+Identifier =
+  'ident'
+
+TypeName =
+  'type_name'
+
+PackageOrTypeName =
+  'package_or_type_name'
+
+TypeIdentifier =
+  'type_ident'
+
+TypeParameter = TypeIdentifier
+
+ClassType =
+  'class_type'
+
+InterfaceType =
+  'interface_type'
+
+// Top Level
+
+CompilationUnit =
+  PackageDeclaration? ImportDeclaration* TopLevelClassOrInterfaceDeclaration
+
+PackageDeclaration =
+  'package' Identifier ('.' Identifier)? ';'
+
+ImportDeclaration =
+  SingleTypeImportDeclaration
+| TypeImportOnDemandDeclaration
+| SingleStaticImportDeclaration
+| StaticImportOnDemandDeclaration
+
+SingleTypeImportDeclaration =
+  'import' TypeName ';'
+
+TypeImportOnDemandDeclaration =
+  'import' PackageOrTypeName '.' '*' ';'
+
+SingleStaticImportDeclaration =
+  'import' 'static' TypeName '.' Identifier ';'
+
+StaticImportOnDemandDeclaration =
+  'import' 'static' TypeName '.' '*' ';'
+
+TopLevelClassOrInterfaceDeclaration =
+  ClassDeclaration
+| InterfaceDeclaration
+
+
+// Class
+
+ClassDeclaration =
+  NormalClassDeclaration
+| EnumDeclaration
+
+NormalClassDeclaration =
+  ClassModifier* 'class' TypeIdentifier
+  TypeParameters? ClassExtends? ClassImplements? ClassBody
+
+ClassModifier =
+  'public' | 'protected' | 'private'
+| 'abstract' | 'static' | 'final'
+
+TypeParameters =
+  '<' TypeParameterList '>'
+
+TypeParameterList =
+  TypeParameter (',' TypeParameter)?
+
+
+ClassExtends =
+  'extends' ClassType
+
+ClassImplements =
+  'implements' InterfaceTypeList
+
+InterfaceTypeList =
+  InterfaceType (',' InterfaceType)?
+
+ClassBody =
+  '{' ClassBodyDeclaration '}'
+
+ClassBodyDeclaration = ''
+
+EnumDeclaration = ''
+
+
+// Interface
+
+InterfaceDeclaration = ''

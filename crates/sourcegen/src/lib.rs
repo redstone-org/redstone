@@ -1,23 +1,27 @@
-pub mod syntax_kind;
 pub mod utils;
 
+mod ast_tokens;
+mod syntax_kinds;
+
+use ast_tokens::GenerateAstTokens;
 use quote::format_ident;
-use syntax_kind::GenerateSyntaxKinds;
+use syntax_kinds::GenerateSyntaxKinds;
 use utils::to_upper_snake_case;
 
 pub type StrArrayRef<'a> = &'a [&'a str];
 
 pub type StrTupleArrayRef<'a> = &'a [(&'a str, &'a str)];
 
-pub struct AstSource<'a> {
+pub struct SyntaxKindSource<'a> {
     pub seperators: StrTupleArrayRef<'a>,
     pub reserved_keywords: StrArrayRef<'a>,
     pub contextual_keywords: StrArrayRef<'a>,
     pub literals: StrArrayRef<'a>,
     pub nodes: StrArrayRef<'a>,
+    pub tokens: StrArrayRef<'a>,
 }
 
-pub fn generate_syntax_kinds(source: &AstSource) -> String {
+pub fn generate_syntax_kinds(source: &SyntaxKindSource) -> String {
     let seperators = source
         .seperators
         .iter()
@@ -36,10 +40,29 @@ pub fn generate_syntax_kinds(source: &AstSource) -> String {
         .map(|name| format_ident!("{}", name))
         .collect::<Vec<_>>();
 
+    let tokens = source
+        .tokens
+        .iter()
+        .map(|name| format_ident!("{}", name))
+        .collect::<Vec<_>>();
+
     let recipe = GenerateSyntaxKinds {
         seperators,
         reserved_keywords,
         literals,
+        tokens,
+    };
+
+    utils::reformat(recipe.generate())
+}
+
+pub struct AstSource {
+    pub tokens: Vec<String>,
+}
+
+pub fn generate_ast_tokens(source: &AstSource) -> String {
+    let recipe = GenerateAstTokens {
+        tokens: source.tokens.clone(),
     };
 
     utils::reformat(recipe.generate())

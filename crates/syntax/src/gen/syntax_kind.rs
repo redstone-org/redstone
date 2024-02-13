@@ -75,6 +75,9 @@ pub enum SyntaxKind {
     STRING,
     TEXT_BLOCK,
     NULL,
+    IDENT,
+    WHITESPACE,
+    COMMENT,
     #[doc(hidden)]
     __LAST,
 }

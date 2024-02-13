@@ -1,9 +1,9 @@
 //! Input used for source generation.
 //! We generate SyntaxKind enum from this.
 
-use sourcegen::AstSource;
+use sourcegen::SyntaxKindSource;
 
-pub const AST_SOURCE: AstSource<'_> = AstSource {
+pub const SYNTAX_KIND_SOURCE: SyntaxKindSource<'_> = SyntaxKindSource {
     seperators: &[
         ("(", "L_PAREN"),
         (")", "R_PAREN"),
@@ -99,4 +99,5 @@ pub const AST_SOURCE: AstSource<'_> = AstSource {
         "NULL",
     ],
     nodes: &[],
+    tokens: &["IDENT", "WHITESPACE", "COMMENT"],
 };

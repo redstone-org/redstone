@@ -5,6 +5,8 @@ xflags::xflags! {
         cmd generate-ast {
             optional --dry-run
         }
+        cmd ungrammar-json {
+        }
     }
 }
 // generated start
@@ -18,12 +20,16 @@ pub struct Xtask {
 #[derive(Debug)]
 pub enum XtaskCmd {
     GenerateAst(GenerateAst),
+    UngrammarJson(UngrammarJson),
 }
 
 #[derive(Debug)]
 pub struct GenerateAst {
     pub dry_run: bool,
 }
+
+#[derive(Debug)]
+pub struct UngrammarJson;
 
 impl Xtask {
     #[allow(dead_code)]

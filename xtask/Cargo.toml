@@ -11,3 +11,4 @@ xflags.workspace = true
 sourcegen.workspace = true
 syntax.workspace = true
 ungrammar = "1.16.1"
+write-json = "0.1.1"

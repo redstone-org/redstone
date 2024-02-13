@@ -5,6 +5,7 @@ pub struct GenerateSyntaxKinds {
     pub seperators: Vec<Ident>,
     pub reserved_keywords: Vec<Ident>,
     pub literals: Vec<Ident>,
+    pub tokens: Vec<Ident>,
 }
 
 impl GenerateSyntaxKinds {
@@ -12,7 +13,7 @@ impl GenerateSyntaxKinds {
         let seperators = &self.seperators;
         let reserved_keywords = &self.reserved_keywords;
         let literals = &self.literals;
-        let tokens: Vec<&str> = vec![];
+        let tokens = &self.tokens;
         let nodes: Vec<&str> = vec![];
 
         let generated = quote! {
