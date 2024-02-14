@@ -1,16 +1,18 @@
 //! Input used for source generation.
 //! We generate SyntaxKind enum from this.
 
-use sourcegen::SyntaxKindSource;
+use sourcegen::{AstTokenSource, SyntaxKindSource};
 
 pub const SYNTAX_KIND_SOURCE: SyntaxKindSource<'_> = SyntaxKindSource {
-    seperators: &[
+    punctuations: &[
         ("(", "L_PAREN"),
         (")", "R_PAREN"),
         ("{", "L_CURLY"),
         ("}", "R_CURLY"),
         ("[", "L_BRACK"),
         ("]", "R_BRACK"),
+        ("<", "L_ANGLE"),
+        (">", "R_ANGLE"),
         (";", "SEMICOLON"),
         (",", "COMMA"),
         (".", "DOT"),
@@ -100,4 +102,21 @@ pub const SYNTAX_KIND_SOURCE: SyntaxKindSource<'_> = SyntaxKindSource {
     ],
     nodes: &[],
     tokens: &["IDENT", "WHITESPACE", "COMMENT"],
+};
+
+// We manually set it for now, only need terminals that hold an inner value.
+// TODO: Is there a cleaner way to use SyntaxKind and AST Token generation
+// based on ungrammar.
+pub const AST_TOKENS_SOURCE: AstTokenSource = AstTokenSource {
+    tokens: &[
+        "Ident",
+        "Whitespace",
+        "Comment",
+        "Integer",
+        "FloatingPoint",
+        "Boolean",
+        "Character",
+        "String",
+        "TextBlock",
+    ],
 };

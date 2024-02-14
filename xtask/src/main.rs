@@ -2,8 +2,7 @@ use std::fs;
 
 use flags::GenerateAst;
 
-use sourcegen::AstSource;
-use syntax::source::SYNTAX_KIND_SOURCE;
+use syntax::source::{AST_TOKENS_SOURCE, SYNTAX_KIND_SOURCE};
 use ungrammar::Grammar;
 
 mod flags;
@@ -12,6 +11,7 @@ mod ungrammar_json;
 static UNGRAMMAR_FILE: &str = "crates/syntax/java.ungram";
 static SYNTAX_KIND_FILE: &str = "crates/syntax/src/gen/syntax_kind.rs";
 static AST_TOKENS_FILE: &str = "crates/syntax/src/gen/ast_tokens.rs";
+static AST_NODES_FILE: &str = "crates/syntax/src/gen/ast_nodes.rs";
 
 fn main() {
     let xtask_flags = flags::Xtask::from_env_or_exit();
@@ -30,9 +30,6 @@ fn generate_ast(params: GenerateAst) {
 
     let workspace_dir = sourcegen::utils::workspace_dir();
 
-    let ungrammar_file = workspace_dir.join(UNGRAMMAR_FILE);
-    let grammar: Grammar = fs::read_to_string(ungrammar_file).unwrap().parse().unwrap();
-
     // 1. Generate Syntax Kinds
     let syntax_kinds = sourcegen::generate_syntax_kinds(&SYNTAX_KIND_SOURCE);
     let syntax_kinds_file = workspace_dir.join(SYNTAX_KIND_FILE);
@@ -41,31 +38,30 @@ fn generate_ast(params: GenerateAst) {
     sourcegen::utils::sync(syntax_kinds_file.as_path(), &syntax_kinds);
 
     // 2. Generate AST Tokens
-    let ast_source = lower(&grammar);
-    let ast_tokens = sourcegen::generate_ast_tokens(&ast_source);
+    let tokens_source = AST_TOKENS_SOURCE
+        .tokens
+        .iter()
+        .map(|it| it.to_string())
+        .collect::<Vec<_>>();
+    let ast_tokens = sourcegen::generate_ast_tokens(tokens_source);
     let ast_tokens_file = workspace_dir.join(AST_TOKENS_FILE);
 
     println!("Syncing ast tokens");
     sourcegen::utils::sync(ast_tokens_file.as_path(), &ast_tokens);
 
     // 3. Generate AST Nodes
-    println!("{:#?}", grammar);
-}
+    let ungrammar_file = workspace_dir.join(UNGRAMMAR_FILE);
+    let grammar: Grammar = match fs::read_to_string(ungrammar_file).unwrap().parse() {
+        Ok(g) => g,
+        Err(err) => {
+            println!("Error parsing grammar - {}", err);
+            std::process::exit(1)
+        }
+    };
 
-fn lower(_grammar: &Grammar) -> AstSource {
-    // We manually set it for now, only need terminals that hold an inner value.
-    // TODO: Is there a cleaner way to use SyntaxKind and AST Token generation based on ungrammar
-    let tokens = vec![
-        "Ident",
-        "Whitespace",
-        "Comment",
-        "Integer",
-        "FloatingPoint",
-        "Boolean",
-        "Character",
-        "String",
-        "TextBlock",
-    ];
-    let tokens = tokens.iter().map(|it| it.to_string()).collect::<Vec<_>>();
-    AstSource { tokens }
+    let ast_nodes = sourcegen::generate_ast_nodes(&grammar);
+    let ast_nodes_file = workspace_dir.join(AST_NODES_FILE);
+
+    println!("Syncing ast nodes");
+    sourcegen::utils::sync(ast_nodes_file.as_path(), &ast_nodes);
 }
