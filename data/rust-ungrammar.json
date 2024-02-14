@@ -1,0 +1,4423 @@
+{
+  "Name": {
+    "alt": [
+      {
+        "token": "ident"
+      },
+      {
+        "token": "self"
+      }
+    ]
+  },
+  "NameRef": {
+    "alt": [
+      {
+        "token": "ident"
+      },
+      {
+        "token": "int_number"
+      },
+      {
+        "token": "self"
+      },
+      {
+        "token": "super"
+      },
+      {
+        "token": "crate"
+      },
+      {
+        "token": "Self"
+      }
+    ]
+  },
+  "Lifetime": {
+    "token": "lifetime_ident"
+  },
+  "Path": {
+    "seq": [
+      {
+        "opt": {
+          "seq": [
+            {
+              "label": "qualifier",
+              "rule": {
+                "node": "Path"
+              }
+            },
+            {
+              "token": "::"
+            }
+          ]
+        }
+      },
+      {
+        "label": "segment",
+        "rule": {
+          "node": "PathSegment"
+        }
+      }
+    ]
+  },
+  "PathSegment": {
+    "alt": [
+      {
+        "seq": [
+          {
+            "opt": {
+              "token": "::"
+            }
+          },
+          {
+            "node": "NameRef"
+          }
+        ]
+      },
+      {
+        "seq": [
+          {
+            "node": "NameRef"
+          },
+          {
+            "opt": {
+              "node": "GenericArgList"
+            }
+          }
+        ]
+      },
+      {
+        "seq": [
+          {
+            "node": "NameRef"
+          },
+          {
+            "node": "ParamList"
+          },
+          {
+            "opt": {
+              "node": "RetType"
+            }
+          }
+        ]
+      },
+      {
+        "seq": [
+          {
+            "token": "<"
+          },
+          {
+            "node": "Type"
+          },
+          {
+            "opt": {
+              "seq": [
+                {
+                  "token": "as"
+                },
+                {
+                  "node": "PathType"
+                }
+              ]
+            }
+          },
+          {
+            "token": ">"
+          }
+        ]
+      }
+    ]
+  },
+  "GenericArgList": {
+    "seq": [
+      {
+        "opt": {
+          "token": "::"
+        }
+      },
+      {
+        "token": "<"
+      },
+      {
+        "opt": {
+          "seq": [
+            {
+              "node": "GenericArg"
+            },
+            {
+              "rep": {
+                "seq": [
+                  {
+                    "token": ","
+                  },
+                  {
+                    "node": "GenericArg"
+                  }
+                ]
+              }
+            },
+            {
+              "opt": {
+                "token": ","
+              }
+            }
+          ]
+        }
+      },
+      {
+        "token": ">"
+      }
+    ]
+  },
+  "ParamList": {
+    "alt": [
+      {
+        "seq": [
+          {
+            "token": "("
+          },
+          {
+            "alt": [
+              {
+                "node": "SelfParam"
+              },
+              {
+                "seq": [
+                  {
+                    "opt": {
+                      "seq": [
+                        {
+                          "node": "SelfParam"
+                        },
+                        {
+                          "token": ","
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "opt": {
+                      "seq": [
+                        {
+                          "node": "Param"
+                        },
+                        {
+                          "rep": {
+                            "seq": [
+                              {
+                                "token": ","
+                              },
+                              {
+                                "node": "Param"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "opt": {
+                            "token": ","
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "token": ")"
+          }
+        ]
+      },
+      {
+        "seq": [
+          {
+            "token": "|"
+          },
+          {
+            "opt": {
+              "seq": [
+                {
+                  "node": "Param"
+                },
+                {
+                  "rep": {
+                    "seq": [
+                      {
+                        "token": ","
+                      },
+                      {
+                        "node": "Param"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "opt": {
+                    "token": ","
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "token": "|"
+          }
+        ]
+      }
+    ]
+  },
+  "RetType": {
+    "seq": [
+      {
+        "token": "->"
+      },
+      {
+        "node": "Type"
+      }
+    ]
+  },
+  "Type": {
+    "alt": [
+      {
+        "node": "ArrayType"
+      },
+      {
+        "node": "DynTraitType"
+      },
+      {
+        "node": "FnPtrType"
+      },
+      {
+        "node": "ForType"
+      },
+      {
+        "node": "ImplTraitType"
+      },
+      {
+        "node": "InferType"
+      },
+      {
+        "node": "MacroType"
+      },
+      {
+        "node": "NeverType"
+      },
+      {
+        "node": "ParenType"
+      },
+      {
+        "node": "PathType"
+      },
+      {
+        "node": "PtrType"
+      },
+      {
+        "node": "RefType"
+      },
+      {
+        "node": "SliceType"
+      },
+      {
+        "node": "TupleType"
+      }
+    ]
+  },
+  "PathType": {
+    "node": "Path"
+  },
+  "GenericArg": {
+    "alt": [
+      {
+        "node": "TypeArg"
+      },
+      {
+        "node": "AssocTypeArg"
+      },
+      {
+        "node": "LifetimeArg"
+      },
+      {
+        "node": "ConstArg"
+      }
+    ]
+  },
+  "TypeArg": {
+    "node": "Type"
+  },
+  "AssocTypeArg": {
+    "seq": [
+      {
+        "node": "NameRef"
+      },
+      {
+        "opt": {
+          "alt": [
+            {
+              "node": "GenericArgList"
+            },
+            {
+              "seq": [
+                {
+                  "node": "ParamList"
+                },
+                {
+                  "opt": {
+                    "node": "RetType"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "alt": [
+          {
+            "seq": [
+              {
+                "token": ":"
+              },
+              {
+                "node": "TypeBoundList"
+              }
+            ]
+          },
+          {
+            "alt": [
+              {
+                "seq": [
+                  {
+                    "token": "="
+                  },
+                  {
+                    "node": "Type"
+                  }
+                ]
+              },
+              {
+                "node": "ConstArg"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "LifetimeArg": {
+    "node": "Lifetime"
+  },
+  "ConstArg": {
+    "node": "Expr"
+  },
+  "TypeBoundList": {
+    "label": "bounds",
+    "rule": {
+      "seq": [
+        {
+          "node": "TypeBound"
+        },
+        {
+          "rep": {
+            "seq": [
+              {
+                "token": "+"
+              },
+              {
+                "node": "TypeBound"
+              }
+            ]
+          }
+        },
+        {
+          "opt": {
+            "token": "+"
+          }
+        }
+      ]
+    }
+  },
+  "Expr": {
+    "alt": [
+      {
+        "node": "ArrayExpr"
+      },
+      {
+        "node": "AsmExpr"
+      },
+      {
+        "node": "AwaitExpr"
+      },
+      {
+        "node": "BinExpr"
+      },
+      {
+        "node": "BlockExpr"
+      },
+      {
+        "node": "BreakExpr"
+      },
+      {
+        "node": "CallExpr"
+      },
+      {
+        "node": "CastExpr"
+      },
+      {
+        "node": "ClosureExpr"
+      },
+      {
+        "node": "ContinueExpr"
+      },
+      {
+        "node": "FieldExpr"
+      },
+      {
+        "node": "ForExpr"
+      },
+      {
+        "node": "FormatArgsExpr"
+      },
+      {
+        "node": "IfExpr"
+      },
+      {
+        "node": "IndexExpr"
+      },
+      {
+        "node": "Literal"
+      },
+      {
+        "node": "LoopExpr"
+      },
+      {
+        "node": "MacroExpr"
+      },
+      {
+        "node": "MatchExpr"
+      },
+      {
+        "node": "MethodCallExpr"
+      },
+      {
+        "node": "OffsetOfExpr"
+      },
+      {
+        "node": "ParenExpr"
+      },
+      {
+        "node": "PathExpr"
+      },
+      {
+        "node": "PrefixExpr"
+      },
+      {
+        "node": "RangeExpr"
+      },
+      {
+        "node": "RecordExpr"
+      },
+      {
+        "node": "RefExpr"
+      },
+      {
+        "node": "ReturnExpr"
+      },
+      {
+        "node": "TryExpr"
+      },
+      {
+        "node": "TupleExpr"
+      },
+      {
+        "node": "WhileExpr"
+      },
+      {
+        "node": "YieldExpr"
+      },
+      {
+        "node": "YeetExpr"
+      },
+      {
+        "node": "LetExpr"
+      },
+      {
+        "node": "UnderscoreExpr"
+      }
+    ]
+  },
+  "MacroCall": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "node": "Path"
+      },
+      {
+        "token": "!"
+      },
+      {
+        "node": "TokenTree"
+      },
+      {
+        "opt": {
+          "token": ";"
+        }
+      }
+    ]
+  },
+  "Attr": {
+    "seq": [
+      {
+        "token": "#"
+      },
+      {
+        "opt": {
+          "token": "!"
+        }
+      },
+      {
+        "token": "["
+      },
+      {
+        "node": "Meta"
+      },
+      {
+        "token": "]"
+      }
+    ]
+  },
+  "TokenTree": {
+    "alt": [
+      {
+        "seq": [
+          {
+            "token": "("
+          },
+          {
+            "token": ")"
+          }
+        ]
+      },
+      {
+        "seq": [
+          {
+            "token": "{"
+          },
+          {
+            "token": "}"
+          }
+        ]
+      },
+      {
+        "seq": [
+          {
+            "token": "["
+          },
+          {
+            "token": "]"
+          }
+        ]
+      }
+    ]
+  },
+  "MacroItems": {
+    "rep": {
+      "node": "Item"
+    }
+  },
+  "Item": {
+    "alt": [
+      {
+        "node": "Const"
+      },
+      {
+        "node": "Enum"
+      },
+      {
+        "node": "ExternBlock"
+      },
+      {
+        "node": "ExternCrate"
+      },
+      {
+        "node": "Fn"
+      },
+      {
+        "node": "Impl"
+      },
+      {
+        "node": "MacroCall"
+      },
+      {
+        "node": "MacroRules"
+      },
+      {
+        "node": "MacroDef"
+      },
+      {
+        "node": "Module"
+      },
+      {
+        "node": "Static"
+      },
+      {
+        "node": "Struct"
+      },
+      {
+        "node": "Trait"
+      },
+      {
+        "node": "TraitAlias"
+      },
+      {
+        "node": "TypeAlias"
+      },
+      {
+        "node": "Union"
+      },
+      {
+        "node": "Use"
+      }
+    ]
+  },
+  "MacroEagerInput": {
+    "alt": [
+      {
+        "seq": [
+          {
+            "token": "("
+          },
+          {
+            "opt": {
+              "seq": [
+                {
+                  "node": "Expr"
+                },
+                {
+                  "rep": {
+                    "seq": [
+                      {
+                        "token": ","
+                      },
+                      {
+                        "node": "Expr"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "opt": {
+                    "token": ","
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "token": ")"
+          }
+        ]
+      },
+      {
+        "seq": [
+          {
+            "token": "{"
+          },
+          {
+            "opt": {
+              "seq": [
+                {
+                  "node": "Expr"
+                },
+                {
+                  "rep": {
+                    "seq": [
+                      {
+                        "token": ","
+                      },
+                      {
+                        "node": "Expr"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "opt": {
+                    "token": ","
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "token": "}"
+          }
+        ]
+      },
+      {
+        "seq": [
+          {
+            "token": "["
+          },
+          {
+            "opt": {
+              "seq": [
+                {
+                  "node": "Expr"
+                },
+                {
+                  "rep": {
+                    "seq": [
+                      {
+                        "token": ","
+                      },
+                      {
+                        "node": "Expr"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "opt": {
+                    "token": ","
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "token": "]"
+          }
+        ]
+      }
+    ]
+  },
+  "MacroStmts": {
+    "seq": [
+      {
+        "label": "statements",
+        "rule": {
+          "rep": {
+            "node": "Stmt"
+          }
+        }
+      },
+      {
+        "opt": {
+          "node": "Expr"
+        }
+      }
+    ]
+  },
+  "Stmt": {
+    "alt": [
+      {
+        "token": ";"
+      },
+      {
+        "node": "ExprStmt"
+      },
+      {
+        "node": "Item"
+      },
+      {
+        "node": "LetStmt"
+      }
+    ]
+  },
+  "SourceFile": {
+    "seq": [
+      {
+        "opt": {
+          "token": "shebang"
+        }
+      },
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "rep": {
+          "node": "Item"
+        }
+      }
+    ]
+  },
+  "Const": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "opt": {
+          "node": "Visibility"
+        }
+      },
+      {
+        "opt": {
+          "token": "default"
+        }
+      },
+      {
+        "token": "const"
+      },
+      {
+        "alt": [
+          {
+            "node": "Name"
+          },
+          {
+            "token": "_"
+          }
+        ]
+      },
+      {
+        "token": ":"
+      },
+      {
+        "node": "Type"
+      },
+      {
+        "opt": {
+          "seq": [
+            {
+              "token": "="
+            },
+            {
+              "label": "body",
+              "rule": {
+                "node": "Expr"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "token": ";"
+      }
+    ]
+  },
+  "Enum": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "opt": {
+          "node": "Visibility"
+        }
+      },
+      {
+        "token": "enum"
+      },
+      {
+        "node": "Name"
+      },
+      {
+        "opt": {
+          "node": "GenericParamList"
+        }
+      },
+      {
+        "opt": {
+          "node": "WhereClause"
+        }
+      },
+      {
+        "node": "VariantList"
+      }
+    ]
+  },
+  "ExternBlock": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "opt": {
+          "token": "unsafe"
+        }
+      },
+      {
+        "node": "Abi"
+      },
+      {
+        "node": "ExternItemList"
+      }
+    ]
+  },
+  "ExternCrate": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "opt": {
+          "node": "Visibility"
+        }
+      },
+      {
+        "token": "extern"
+      },
+      {
+        "token": "crate"
+      },
+      {
+        "node": "NameRef"
+      },
+      {
+        "opt": {
+          "node": "Rename"
+        }
+      },
+      {
+        "token": ";"
+      }
+    ]
+  },
+  "Fn": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "opt": {
+          "node": "Visibility"
+        }
+      },
+      {
+        "opt": {
+          "token": "default"
+        }
+      },
+      {
+        "opt": {
+          "token": "const"
+        }
+      },
+      {
+        "opt": {
+          "token": "async"
+        }
+      },
+      {
+        "opt": {
+          "token": "unsafe"
+        }
+      },
+      {
+        "opt": {
+          "node": "Abi"
+        }
+      },
+      {
+        "token": "fn"
+      },
+      {
+        "node": "Name"
+      },
+      {
+        "opt": {
+          "node": "GenericParamList"
+        }
+      },
+      {
+        "node": "ParamList"
+      },
+      {
+        "opt": {
+          "node": "RetType"
+        }
+      },
+      {
+        "opt": {
+          "node": "WhereClause"
+        }
+      },
+      {
+        "alt": [
+          {
+            "label": "body",
+            "rule": {
+              "node": "BlockExpr"
+            }
+          },
+          {
+            "token": ";"
+          }
+        ]
+      }
+    ]
+  },
+  "Impl": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "opt": {
+          "node": "Visibility"
+        }
+      },
+      {
+        "opt": {
+          "token": "default"
+        }
+      },
+      {
+        "opt": {
+          "token": "unsafe"
+        }
+      },
+      {
+        "token": "impl"
+      },
+      {
+        "opt": {
+          "node": "GenericParamList"
+        }
+      },
+      {
+        "opt": {
+          "seq": [
+            {
+              "opt": {
+                "token": "const"
+              }
+            },
+            {
+              "opt": {
+                "token": "!"
+              }
+            },
+            {
+              "label": "trait",
+              "rule": {
+                "node": "Type"
+              }
+            },
+            {
+              "token": "for"
+            }
+          ]
+        }
+      },
+      {
+        "label": "self_ty",
+        "rule": {
+          "node": "Type"
+        }
+      },
+      {
+        "opt": {
+          "node": "WhereClause"
+        }
+      },
+      {
+        "node": "AssocItemList"
+      }
+    ]
+  },
+  "MacroRules": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "opt": {
+          "node": "Visibility"
+        }
+      },
+      {
+        "token": "macro_rules"
+      },
+      {
+        "token": "!"
+      },
+      {
+        "node": "Name"
+      },
+      {
+        "node": "TokenTree"
+      }
+    ]
+  },
+  "MacroDef": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "opt": {
+          "node": "Visibility"
+        }
+      },
+      {
+        "token": "macro"
+      },
+      {
+        "node": "Name"
+      },
+      {
+        "label": "args",
+        "rule": {
+          "opt": {
+            "node": "TokenTree"
+          }
+        }
+      },
+      {
+        "label": "body",
+        "rule": {
+          "node": "TokenTree"
+        }
+      }
+    ]
+  },
+  "Module": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "opt": {
+          "node": "Visibility"
+        }
+      },
+      {
+        "token": "mod"
+      },
+      {
+        "node": "Name"
+      },
+      {
+        "alt": [
+          {
+            "node": "ItemList"
+          },
+          {
+            "token": ";"
+          }
+        ]
+      }
+    ]
+  },
+  "Static": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "opt": {
+          "node": "Visibility"
+        }
+      },
+      {
+        "token": "static"
+      },
+      {
+        "opt": {
+          "token": "mut"
+        }
+      },
+      {
+        "node": "Name"
+      },
+      {
+        "token": ":"
+      },
+      {
+        "node": "Type"
+      },
+      {
+        "opt": {
+          "seq": [
+            {
+              "token": "="
+            },
+            {
+              "label": "body",
+              "rule": {
+                "node": "Expr"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "token": ";"
+      }
+    ]
+  },
+  "Struct": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "opt": {
+          "node": "Visibility"
+        }
+      },
+      {
+        "token": "struct"
+      },
+      {
+        "node": "Name"
+      },
+      {
+        "opt": {
+          "node": "GenericParamList"
+        }
+      },
+      {
+        "alt": [
+          {
+            "seq": [
+              {
+                "opt": {
+                  "node": "WhereClause"
+                }
+              },
+              {
+                "alt": [
+                  {
+                    "node": "RecordFieldList"
+                  },
+                  {
+                    "token": ";"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "seq": [
+              {
+                "node": "TupleFieldList"
+              },
+              {
+                "opt": {
+                  "node": "WhereClause"
+                }
+              },
+              {
+                "token": ";"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "Trait": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "opt": {
+          "node": "Visibility"
+        }
+      },
+      {
+        "opt": {
+          "token": "unsafe"
+        }
+      },
+      {
+        "opt": {
+          "token": "auto"
+        }
+      },
+      {
+        "token": "trait"
+      },
+      {
+        "node": "Name"
+      },
+      {
+        "opt": {
+          "node": "GenericParamList"
+        }
+      },
+      {
+        "opt": {
+          "seq": [
+            {
+              "token": ":"
+            },
+            {
+              "opt": {
+                "node": "TypeBoundList"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "opt": {
+          "node": "WhereClause"
+        }
+      },
+      {
+        "node": "AssocItemList"
+      }
+    ]
+  },
+  "TraitAlias": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "opt": {
+          "node": "Visibility"
+        }
+      },
+      {
+        "token": "trait"
+      },
+      {
+        "node": "Name"
+      },
+      {
+        "opt": {
+          "node": "GenericParamList"
+        }
+      },
+      {
+        "token": "="
+      },
+      {
+        "opt": {
+          "node": "TypeBoundList"
+        }
+      },
+      {
+        "opt": {
+          "node": "WhereClause"
+        }
+      },
+      {
+        "token": ";"
+      }
+    ]
+  },
+  "TypeAlias": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "opt": {
+          "node": "Visibility"
+        }
+      },
+      {
+        "opt": {
+          "token": "default"
+        }
+      },
+      {
+        "token": "type"
+      },
+      {
+        "node": "Name"
+      },
+      {
+        "opt": {
+          "node": "GenericParamList"
+        }
+      },
+      {
+        "opt": {
+          "seq": [
+            {
+              "token": ":"
+            },
+            {
+              "opt": {
+                "node": "TypeBoundList"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "opt": {
+          "node": "WhereClause"
+        }
+      },
+      {
+        "opt": {
+          "seq": [
+            {
+              "token": "="
+            },
+            {
+              "node": "Type"
+            }
+          ]
+        }
+      },
+      {
+        "token": ";"
+      }
+    ]
+  },
+  "Union": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "opt": {
+          "node": "Visibility"
+        }
+      },
+      {
+        "token": "union"
+      },
+      {
+        "node": "Name"
+      },
+      {
+        "opt": {
+          "node": "GenericParamList"
+        }
+      },
+      {
+        "opt": {
+          "node": "WhereClause"
+        }
+      },
+      {
+        "node": "RecordFieldList"
+      }
+    ]
+  },
+  "Use": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "opt": {
+          "node": "Visibility"
+        }
+      },
+      {
+        "token": "use"
+      },
+      {
+        "node": "UseTree"
+      },
+      {
+        "token": ";"
+      }
+    ]
+  },
+  "Visibility": {
+    "seq": [
+      {
+        "token": "pub"
+      },
+      {
+        "opt": {
+          "seq": [
+            {
+              "token": "("
+            },
+            {
+              "opt": {
+                "token": "in"
+              }
+            },
+            {
+              "node": "Path"
+            },
+            {
+              "token": ")"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "ItemList": {
+    "seq": [
+      {
+        "token": "{"
+      },
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "rep": {
+          "node": "Item"
+        }
+      },
+      {
+        "token": "}"
+      }
+    ]
+  },
+  "Rename": {
+    "seq": [
+      {
+        "token": "as"
+      },
+      {
+        "alt": [
+          {
+            "node": "Name"
+          },
+          {
+            "token": "_"
+          }
+        ]
+      }
+    ]
+  },
+  "UseTree": {
+    "alt": [
+      {
+        "seq": [
+          {
+            "opt": {
+              "seq": [
+                {
+                  "opt": {
+                    "node": "Path"
+                  }
+                },
+                {
+                  "token": "::"
+                }
+              ]
+            }
+          },
+          {
+            "alt": [
+              {
+                "token": "*"
+              },
+              {
+                "node": "UseTreeList"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "seq": [
+          {
+            "node": "Path"
+          },
+          {
+            "opt": {
+              "node": "Rename"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "UseTreeList": {
+    "seq": [
+      {
+        "token": "{"
+      },
+      {
+        "opt": {
+          "seq": [
+            {
+              "node": "UseTree"
+            },
+            {
+              "rep": {
+                "seq": [
+                  {
+                    "token": ","
+                  },
+                  {
+                    "node": "UseTree"
+                  }
+                ]
+              }
+            },
+            {
+              "opt": {
+                "token": ","
+              }
+            }
+          ]
+        }
+      },
+      {
+        "token": "}"
+      }
+    ]
+  },
+  "Abi": {
+    "seq": [
+      {
+        "token": "extern"
+      },
+      {
+        "opt": {
+          "token": "string"
+        }
+      }
+    ]
+  },
+  "GenericParamList": {
+    "seq": [
+      {
+        "token": "<"
+      },
+      {
+        "opt": {
+          "seq": [
+            {
+              "node": "GenericParam"
+            },
+            {
+              "rep": {
+                "seq": [
+                  {
+                    "token": ","
+                  },
+                  {
+                    "node": "GenericParam"
+                  }
+                ]
+              }
+            },
+            {
+              "opt": {
+                "token": ","
+              }
+            }
+          ]
+        }
+      },
+      {
+        "token": ">"
+      }
+    ]
+  },
+  "WhereClause": {
+    "seq": [
+      {
+        "token": "where"
+      },
+      {
+        "label": "predicates",
+        "rule": {
+          "seq": [
+            {
+              "node": "WherePred"
+            },
+            {
+              "rep": {
+                "seq": [
+                  {
+                    "token": ","
+                  },
+                  {
+                    "node": "WherePred"
+                  }
+                ]
+              }
+            },
+            {
+              "opt": {
+                "token": ","
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "BlockExpr": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "opt": {
+          "node": "Label"
+        }
+      },
+      {
+        "alt": [
+          {
+            "token": "try"
+          },
+          {
+            "token": "unsafe"
+          },
+          {
+            "token": "async"
+          },
+          {
+            "token": "const"
+          }
+        ]
+      },
+      {
+        "node": "StmtList"
+      }
+    ]
+  },
+  "SelfParam": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "alt": [
+          {
+            "seq": [
+              {
+                "opt": {
+                  "seq": [
+                    {
+                      "token": "&"
+                    },
+                    {
+                      "opt": {
+                        "node": "Lifetime"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "opt": {
+                  "token": "mut"
+                }
+              },
+              {
+                "node": "Name"
+              }
+            ]
+          },
+          {
+            "seq": [
+              {
+                "opt": {
+                  "token": "mut"
+                }
+              },
+              {
+                "node": "Name"
+              },
+              {
+                "token": ":"
+              },
+              {
+                "node": "Type"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "Param": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "alt": [
+          {
+            "seq": [
+              {
+                "node": "Pat"
+              },
+              {
+                "opt": {
+                  "seq": [
+                    {
+                      "token": ":"
+                    },
+                    {
+                      "node": "Type"
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "node": "Type"
+          },
+          {
+            "token": "..."
+          }
+        ]
+      }
+    ]
+  },
+  "Pat": {
+    "alt": [
+      {
+        "node": "IdentPat"
+      },
+      {
+        "node": "BoxPat"
+      },
+      {
+        "node": "RestPat"
+      },
+      {
+        "node": "LiteralPat"
+      },
+      {
+        "node": "MacroPat"
+      },
+      {
+        "node": "OrPat"
+      },
+      {
+        "node": "ParenPat"
+      },
+      {
+        "node": "PathPat"
+      },
+      {
+        "node": "WildcardPat"
+      },
+      {
+        "node": "RangePat"
+      },
+      {
+        "node": "RecordPat"
+      },
+      {
+        "node": "RefPat"
+      },
+      {
+        "node": "SlicePat"
+      },
+      {
+        "node": "TuplePat"
+      },
+      {
+        "node": "TupleStructPat"
+      },
+      {
+        "node": "ConstBlockPat"
+      }
+    ]
+  },
+  "RecordFieldList": {
+    "seq": [
+      {
+        "token": "{"
+      },
+      {
+        "label": "fields",
+        "rule": {
+          "opt": {
+            "seq": [
+              {
+                "node": "RecordField"
+              },
+              {
+                "rep": {
+                  "seq": [
+                    {
+                      "token": ","
+                    },
+                    {
+                      "node": "RecordField"
+                    }
+                  ]
+                }
+              },
+              {
+                "opt": {
+                  "token": ","
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "token": "}"
+      }
+    ]
+  },
+  "TupleFieldList": {
+    "seq": [
+      {
+        "token": "("
+      },
+      {
+        "label": "fields",
+        "rule": {
+          "opt": {
+            "seq": [
+              {
+                "node": "TupleField"
+              },
+              {
+                "rep": {
+                  "seq": [
+                    {
+                      "token": ","
+                    },
+                    {
+                      "node": "TupleField"
+                    }
+                  ]
+                }
+              },
+              {
+                "opt": {
+                  "token": ","
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "token": ")"
+      }
+    ]
+  },
+  "RecordField": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "opt": {
+          "node": "Visibility"
+        }
+      },
+      {
+        "node": "Name"
+      },
+      {
+        "token": ":"
+      },
+      {
+        "node": "Type"
+      }
+    ]
+  },
+  "TupleField": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "opt": {
+          "node": "Visibility"
+        }
+      },
+      {
+        "node": "Type"
+      }
+    ]
+  },
+  "FieldList": {
+    "alt": [
+      {
+        "node": "RecordFieldList"
+      },
+      {
+        "node": "TupleFieldList"
+      }
+    ]
+  },
+  "VariantList": {
+    "seq": [
+      {
+        "token": "{"
+      },
+      {
+        "opt": {
+          "seq": [
+            {
+              "node": "Variant"
+            },
+            {
+              "rep": {
+                "seq": [
+                  {
+                    "token": ","
+                  },
+                  {
+                    "node": "Variant"
+                  }
+                ]
+              }
+            },
+            {
+              "opt": {
+                "token": ","
+              }
+            }
+          ]
+        }
+      },
+      {
+        "token": "}"
+      }
+    ]
+  },
+  "Variant": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "opt": {
+          "node": "Visibility"
+        }
+      },
+      {
+        "node": "Name"
+      },
+      {
+        "opt": {
+          "node": "FieldList"
+        }
+      },
+      {
+        "opt": {
+          "seq": [
+            {
+              "token": "="
+            },
+            {
+              "node": "Expr"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "Adt": {
+    "alt": [
+      {
+        "node": "Enum"
+      },
+      {
+        "node": "Struct"
+      },
+      {
+        "node": "Union"
+      }
+    ]
+  },
+  "AssocItemList": {
+    "seq": [
+      {
+        "token": "{"
+      },
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "rep": {
+          "node": "AssocItem"
+        }
+      },
+      {
+        "token": "}"
+      }
+    ]
+  },
+  "AssocItem": {
+    "alt": [
+      {
+        "node": "Const"
+      },
+      {
+        "node": "Fn"
+      },
+      {
+        "node": "MacroCall"
+      },
+      {
+        "node": "TypeAlias"
+      }
+    ]
+  },
+  "ExternItemList": {
+    "seq": [
+      {
+        "token": "{"
+      },
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "rep": {
+          "node": "ExternItem"
+        }
+      },
+      {
+        "token": "}"
+      }
+    ]
+  },
+  "ExternItem": {
+    "alt": [
+      {
+        "node": "Fn"
+      },
+      {
+        "node": "MacroCall"
+      },
+      {
+        "node": "Static"
+      },
+      {
+        "node": "TypeAlias"
+      }
+    ]
+  },
+  "GenericParam": {
+    "alt": [
+      {
+        "node": "ConstParam"
+      },
+      {
+        "node": "LifetimeParam"
+      },
+      {
+        "node": "TypeParam"
+      }
+    ]
+  },
+  "ConstParam": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "token": "const"
+      },
+      {
+        "node": "Name"
+      },
+      {
+        "token": ":"
+      },
+      {
+        "node": "Type"
+      },
+      {
+        "opt": {
+          "seq": [
+            {
+              "token": "="
+            },
+            {
+              "label": "default_val",
+              "rule": {
+                "node": "ConstArg"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "LifetimeParam": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "node": "Lifetime"
+      },
+      {
+        "opt": {
+          "seq": [
+            {
+              "token": ":"
+            },
+            {
+              "opt": {
+                "node": "TypeBoundList"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "TypeParam": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "node": "Name"
+      },
+      {
+        "opt": {
+          "seq": [
+            {
+              "token": ":"
+            },
+            {
+              "opt": {
+                "node": "TypeBoundList"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "opt": {
+          "seq": [
+            {
+              "token": "="
+            },
+            {
+              "label": "default_type",
+              "rule": {
+                "node": "Type"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "WherePred": {
+    "seq": [
+      {
+        "opt": {
+          "seq": [
+            {
+              "token": "for"
+            },
+            {
+              "node": "GenericParamList"
+            }
+          ]
+        }
+      },
+      {
+        "alt": [
+          {
+            "node": "Lifetime"
+          },
+          {
+            "node": "Type"
+          }
+        ]
+      },
+      {
+        "token": ":"
+      },
+      {
+        "opt": {
+          "node": "TypeBoundList"
+        }
+      }
+    ]
+  },
+  "Meta": {
+    "seq": [
+      {
+        "node": "Path"
+      },
+      {
+        "opt": {
+          "alt": [
+            {
+              "seq": [
+                {
+                  "token": "="
+                },
+                {
+                  "node": "Expr"
+                }
+              ]
+            },
+            {
+              "node": "TokenTree"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "ExprStmt": {
+    "seq": [
+      {
+        "node": "Expr"
+      },
+      {
+        "opt": {
+          "token": ";"
+        }
+      }
+    ]
+  },
+  "LetStmt": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "token": "let"
+      },
+      {
+        "node": "Pat"
+      },
+      {
+        "opt": {
+          "seq": [
+            {
+              "token": ":"
+            },
+            {
+              "node": "Type"
+            }
+          ]
+        }
+      },
+      {
+        "token": "="
+      },
+      {
+        "label": "initializer",
+        "rule": {
+          "node": "Expr"
+        }
+      },
+      {
+        "opt": {
+          "node": "LetElse"
+        }
+      },
+      {
+        "token": ";"
+      }
+    ]
+  },
+  "LetElse": {
+    "seq": [
+      {
+        "token": "else"
+      },
+      {
+        "node": "BlockExpr"
+      }
+    ]
+  },
+  "ArrayExpr": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "token": "["
+      },
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "alt": [
+          {
+            "opt": {
+              "seq": [
+                {
+                  "node": "Expr"
+                },
+                {
+                  "rep": {
+                    "seq": [
+                      {
+                        "token": ","
+                      },
+                      {
+                        "node": "Expr"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "opt": {
+                    "token": ","
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "seq": [
+              {
+                "node": "Expr"
+              },
+              {
+                "token": ";"
+              },
+              {
+                "node": "Expr"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "token": "]"
+      }
+    ]
+  },
+  "AsmExpr": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "token": "builtin"
+      },
+      {
+        "token": "#"
+      },
+      {
+        "token": "asm"
+      },
+      {
+        "token": "("
+      },
+      {
+        "node": "Expr"
+      },
+      {
+        "token": ")"
+      }
+    ]
+  },
+  "AwaitExpr": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "node": "Expr"
+      },
+      {
+        "token": "."
+      },
+      {
+        "token": "await"
+      }
+    ]
+  },
+  "BinExpr": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "label": "lhs",
+        "rule": {
+          "node": "Expr"
+        }
+      },
+      {
+        "label": "op",
+        "rule": {
+          "alt": [
+            {
+              "token": "||"
+            },
+            {
+              "token": "&&"
+            },
+            {
+              "token": "=="
+            },
+            {
+              "token": "!="
+            },
+            {
+              "token": "<="
+            },
+            {
+              "token": ">="
+            },
+            {
+              "token": "<"
+            },
+            {
+              "token": ">"
+            },
+            {
+              "token": "+"
+            },
+            {
+              "token": "*"
+            },
+            {
+              "token": "-"
+            },
+            {
+              "token": "/"
+            },
+            {
+              "token": "%"
+            },
+            {
+              "token": "<<"
+            },
+            {
+              "token": ">>"
+            },
+            {
+              "token": "^"
+            },
+            {
+              "token": "|"
+            },
+            {
+              "token": "&"
+            },
+            {
+              "token": "="
+            },
+            {
+              "token": "+="
+            },
+            {
+              "token": "/="
+            },
+            {
+              "token": "*="
+            },
+            {
+              "token": "%="
+            },
+            {
+              "token": ">>="
+            },
+            {
+              "token": "<<="
+            },
+            {
+              "token": "-="
+            },
+            {
+              "token": "|="
+            },
+            {
+              "token": "&="
+            },
+            {
+              "token": "^="
+            }
+          ]
+        }
+      },
+      {
+        "label": "rhs",
+        "rule": {
+          "node": "Expr"
+        }
+      }
+    ]
+  },
+  "BreakExpr": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "token": "break"
+      },
+      {
+        "opt": {
+          "node": "Lifetime"
+        }
+      },
+      {
+        "opt": {
+          "node": "Expr"
+        }
+      }
+    ]
+  },
+  "CallExpr": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "node": "Expr"
+      },
+      {
+        "node": "ArgList"
+      }
+    ]
+  },
+  "CastExpr": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "node": "Expr"
+      },
+      {
+        "token": "as"
+      },
+      {
+        "node": "Type"
+      }
+    ]
+  },
+  "ClosureExpr": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "opt": {
+          "seq": [
+            {
+              "token": "for"
+            },
+            {
+              "node": "GenericParamList"
+            }
+          ]
+        }
+      },
+      {
+        "opt": {
+          "token": "const"
+        }
+      },
+      {
+        "opt": {
+          "token": "static"
+        }
+      },
+      {
+        "opt": {
+          "token": "async"
+        }
+      },
+      {
+        "opt": {
+          "token": "move"
+        }
+      },
+      {
+        "node": "ParamList"
+      },
+      {
+        "opt": {
+          "node": "RetType"
+        }
+      },
+      {
+        "label": "body",
+        "rule": {
+          "node": "Expr"
+        }
+      }
+    ]
+  },
+  "ContinueExpr": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "token": "continue"
+      },
+      {
+        "opt": {
+          "node": "Lifetime"
+        }
+      }
+    ]
+  },
+  "FieldExpr": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "node": "Expr"
+      },
+      {
+        "token": "."
+      },
+      {
+        "node": "NameRef"
+      }
+    ]
+  },
+  "ForExpr": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "opt": {
+          "node": "Label"
+        }
+      },
+      {
+        "token": "for"
+      },
+      {
+        "node": "Pat"
+      },
+      {
+        "token": "in"
+      },
+      {
+        "label": "iterable",
+        "rule": {
+          "node": "Expr"
+        }
+      },
+      {
+        "label": "loop_body",
+        "rule": {
+          "node": "BlockExpr"
+        }
+      }
+    ]
+  },
+  "FormatArgsExpr": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "token": "builtin"
+      },
+      {
+        "token": "#"
+      },
+      {
+        "token": "format_args"
+      },
+      {
+        "token": "("
+      },
+      {
+        "label": "template",
+        "rule": {
+          "node": "Expr"
+        }
+      },
+      {
+        "opt": {
+          "seq": [
+            {
+              "token": ","
+            },
+            {
+              "label": "args",
+              "rule": {
+                "opt": {
+                  "seq": [
+                    {
+                      "node": "FormatArgsArg"
+                    },
+                    {
+                      "rep": {
+                        "seq": [
+                          {
+                            "token": ","
+                          },
+                          {
+                            "node": "FormatArgsArg"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "opt": {
+                        "token": ","
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "token": ")"
+      }
+    ]
+  },
+  "IfExpr": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "token": "if"
+      },
+      {
+        "label": "condition",
+        "rule": {
+          "node": "Expr"
+        }
+      },
+      {
+        "label": "then_branch",
+        "rule": {
+          "node": "BlockExpr"
+        }
+      },
+      {
+        "opt": {
+          "seq": [
+            {
+              "token": "else"
+            },
+            {
+              "label": "else_branch",
+              "rule": {
+                "alt": [
+                  {
+                    "node": "IfExpr"
+                  },
+                  {
+                    "node": "BlockExpr"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "IndexExpr": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "label": "base",
+        "rule": {
+          "node": "Expr"
+        }
+      },
+      {
+        "token": "["
+      },
+      {
+        "label": "index",
+        "rule": {
+          "node": "Expr"
+        }
+      },
+      {
+        "token": "]"
+      }
+    ]
+  },
+  "Literal": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "label": "value",
+        "rule": {
+          "alt": [
+            {
+              "token": "int_number"
+            },
+            {
+              "token": "float_number"
+            },
+            {
+              "token": "string"
+            },
+            {
+              "token": "raw_string"
+            },
+            {
+              "token": "byte_string"
+            },
+            {
+              "token": "raw_byte_string"
+            },
+            {
+              "token": "true"
+            },
+            {
+              "token": "false"
+            },
+            {
+              "token": "char"
+            },
+            {
+              "token": "byte"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "LoopExpr": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "opt": {
+          "node": "Label"
+        }
+      },
+      {
+        "token": "loop"
+      },
+      {
+        "label": "loop_body",
+        "rule": {
+          "node": "BlockExpr"
+        }
+      }
+    ]
+  },
+  "MacroExpr": {
+    "node": "MacroCall"
+  },
+  "MatchExpr": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "token": "match"
+      },
+      {
+        "node": "Expr"
+      },
+      {
+        "node": "MatchArmList"
+      }
+    ]
+  },
+  "MethodCallExpr": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "label": "receiver",
+        "rule": {
+          "node": "Expr"
+        }
+      },
+      {
+        "token": "."
+      },
+      {
+        "node": "NameRef"
+      },
+      {
+        "opt": {
+          "node": "GenericArgList"
+        }
+      },
+      {
+        "node": "ArgList"
+      }
+    ]
+  },
+  "OffsetOfExpr": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "token": "builtin"
+      },
+      {
+        "token": "#"
+      },
+      {
+        "token": "offset_of"
+      },
+      {
+        "token": "("
+      },
+      {
+        "node": "Type"
+      },
+      {
+        "token": ","
+      },
+      {
+        "label": "fields",
+        "rule": {
+          "seq": [
+            {
+              "node": "NameRef"
+            },
+            {
+              "rep": {
+                "seq": [
+                  {
+                    "token": "."
+                  },
+                  {
+                    "node": "NameRef"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "token": ")"
+      }
+    ]
+  },
+  "ParenExpr": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "token": "("
+      },
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "node": "Expr"
+      },
+      {
+        "token": ")"
+      }
+    ]
+  },
+  "PathExpr": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "node": "Path"
+      }
+    ]
+  },
+  "PrefixExpr": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "label": "op",
+        "rule": {
+          "alt": [
+            {
+              "token": "-"
+            },
+            {
+              "token": "!"
+            },
+            {
+              "token": "*"
+            }
+          ]
+        }
+      },
+      {
+        "node": "Expr"
+      }
+    ]
+  },
+  "RangeExpr": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "label": "start",
+        "rule": {
+          "opt": {
+            "node": "Expr"
+          }
+        }
+      },
+      {
+        "label": "op",
+        "rule": {
+          "alt": [
+            {
+              "token": ".."
+            },
+            {
+              "token": "..="
+            }
+          ]
+        }
+      },
+      {
+        "label": "end",
+        "rule": {
+          "opt": {
+            "node": "Expr"
+          }
+        }
+      }
+    ]
+  },
+  "RecordExpr": {
+    "seq": [
+      {
+        "node": "Path"
+      },
+      {
+        "node": "RecordExprFieldList"
+      }
+    ]
+  },
+  "RefExpr": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "token": "&"
+      },
+      {
+        "alt": [
+          {
+            "token": "raw"
+          },
+          {
+            "token": "mut"
+          },
+          {
+            "token": "const"
+          }
+        ]
+      },
+      {
+        "node": "Expr"
+      }
+    ]
+  },
+  "ReturnExpr": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "token": "return"
+      },
+      {
+        "opt": {
+          "node": "Expr"
+        }
+      }
+    ]
+  },
+  "TryExpr": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "node": "Expr"
+      },
+      {
+        "token": "?"
+      }
+    ]
+  },
+  "TupleExpr": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "token": "("
+      },
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "label": "fields",
+        "rule": {
+          "opt": {
+            "seq": [
+              {
+                "node": "Expr"
+              },
+              {
+                "rep": {
+                  "seq": [
+                    {
+                      "token": ","
+                    },
+                    {
+                      "node": "Expr"
+                    }
+                  ]
+                }
+              },
+              {
+                "opt": {
+                  "token": ","
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "token": ")"
+      }
+    ]
+  },
+  "WhileExpr": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "opt": {
+          "node": "Label"
+        }
+      },
+      {
+        "token": "while"
+      },
+      {
+        "label": "condition",
+        "rule": {
+          "node": "Expr"
+        }
+      },
+      {
+        "label": "loop_body",
+        "rule": {
+          "node": "BlockExpr"
+        }
+      }
+    ]
+  },
+  "YieldExpr": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "token": "yield"
+      },
+      {
+        "opt": {
+          "node": "Expr"
+        }
+      }
+    ]
+  },
+  "YeetExpr": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "token": "do"
+      },
+      {
+        "token": "yeet"
+      },
+      {
+        "opt": {
+          "node": "Expr"
+        }
+      }
+    ]
+  },
+  "LetExpr": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "token": "let"
+      },
+      {
+        "node": "Pat"
+      },
+      {
+        "token": "="
+      },
+      {
+        "node": "Expr"
+      }
+    ]
+  },
+  "UnderscoreExpr": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "token": "_"
+      }
+    ]
+  },
+  "FormatArgsArg": {
+    "seq": [
+      {
+        "opt": {
+          "seq": [
+            {
+              "node": "Name"
+            },
+            {
+              "token": "="
+            }
+          ]
+        }
+      },
+      {
+        "node": "Expr"
+      }
+    ]
+  },
+  "StmtList": {
+    "seq": [
+      {
+        "token": "{"
+      },
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "label": "statements",
+        "rule": {
+          "rep": {
+            "node": "Stmt"
+          }
+        }
+      },
+      {
+        "label": "tail_expr",
+        "rule": {
+          "opt": {
+            "node": "Expr"
+          }
+        }
+      },
+      {
+        "token": "}"
+      }
+    ]
+  },
+  "Label": {
+    "seq": [
+      {
+        "node": "Lifetime"
+      },
+      {
+        "token": ":"
+      }
+    ]
+  },
+  "RecordExprFieldList": {
+    "seq": [
+      {
+        "token": "{"
+      },
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "label": "fields",
+        "rule": {
+          "opt": {
+            "seq": [
+              {
+                "node": "RecordExprField"
+              },
+              {
+                "rep": {
+                  "seq": [
+                    {
+                      "token": ","
+                    },
+                    {
+                      "node": "RecordExprField"
+                    }
+                  ]
+                }
+              },
+              {
+                "opt": {
+                  "token": ","
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "opt": {
+          "seq": [
+            {
+              "token": ".."
+            },
+            {
+              "label": "spread",
+              "rule": {
+                "opt": {
+                  "node": "Expr"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "token": "}"
+      }
+    ]
+  },
+  "RecordExprField": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "opt": {
+          "seq": [
+            {
+              "node": "NameRef"
+            },
+            {
+              "token": ":"
+            }
+          ]
+        }
+      },
+      {
+        "node": "Expr"
+      }
+    ]
+  },
+  "ArgList": {
+    "seq": [
+      {
+        "token": "("
+      },
+      {
+        "label": "args",
+        "rule": {
+          "opt": {
+            "seq": [
+              {
+                "node": "Expr"
+              },
+              {
+                "rep": {
+                  "seq": [
+                    {
+                      "token": ","
+                    },
+                    {
+                      "node": "Expr"
+                    }
+                  ]
+                }
+              },
+              {
+                "opt": {
+                  "token": ","
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "token": ")"
+      }
+    ]
+  },
+  "MatchArmList": {
+    "seq": [
+      {
+        "token": "{"
+      },
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "label": "arms",
+        "rule": {
+          "rep": {
+            "node": "MatchArm"
+          }
+        }
+      },
+      {
+        "token": "}"
+      }
+    ]
+  },
+  "MatchArm": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "node": "Pat"
+      },
+      {
+        "label": "guard",
+        "rule": {
+          "opt": {
+            "node": "MatchGuard"
+          }
+        }
+      },
+      {
+        "token": "=>"
+      },
+      {
+        "node": "Expr"
+      },
+      {
+        "opt": {
+          "token": ","
+        }
+      }
+    ]
+  },
+  "MatchGuard": {
+    "seq": [
+      {
+        "token": "if"
+      },
+      {
+        "label": "condition",
+        "rule": {
+          "node": "Expr"
+        }
+      }
+    ]
+  },
+  "ArrayType": {
+    "seq": [
+      {
+        "token": "["
+      },
+      {
+        "node": "Type"
+      },
+      {
+        "token": ";"
+      },
+      {
+        "node": "ConstArg"
+      },
+      {
+        "token": "]"
+      }
+    ]
+  },
+  "DynTraitType": {
+    "seq": [
+      {
+        "opt": {
+          "token": "dyn"
+        }
+      },
+      {
+        "node": "TypeBoundList"
+      }
+    ]
+  },
+  "FnPtrType": {
+    "seq": [
+      {
+        "opt": {
+          "token": "const"
+        }
+      },
+      {
+        "opt": {
+          "token": "async"
+        }
+      },
+      {
+        "opt": {
+          "token": "unsafe"
+        }
+      },
+      {
+        "opt": {
+          "node": "Abi"
+        }
+      },
+      {
+        "token": "fn"
+      },
+      {
+        "node": "ParamList"
+      },
+      {
+        "opt": {
+          "node": "RetType"
+        }
+      }
+    ]
+  },
+  "ForType": {
+    "seq": [
+      {
+        "token": "for"
+      },
+      {
+        "node": "GenericParamList"
+      },
+      {
+        "node": "Type"
+      }
+    ]
+  },
+  "ImplTraitType": {
+    "seq": [
+      {
+        "token": "impl"
+      },
+      {
+        "node": "TypeBoundList"
+      }
+    ]
+  },
+  "InferType": {
+    "token": "_"
+  },
+  "MacroType": {
+    "node": "MacroCall"
+  },
+  "NeverType": {
+    "token": "!"
+  },
+  "ParenType": {
+    "seq": [
+      {
+        "token": "("
+      },
+      {
+        "node": "Type"
+      },
+      {
+        "token": ")"
+      }
+    ]
+  },
+  "PtrType": {
+    "seq": [
+      {
+        "token": "*"
+      },
+      {
+        "alt": [
+          {
+            "token": "const"
+          },
+          {
+            "token": "mut"
+          }
+        ]
+      },
+      {
+        "node": "Type"
+      }
+    ]
+  },
+  "RefType": {
+    "seq": [
+      {
+        "token": "&"
+      },
+      {
+        "opt": {
+          "node": "Lifetime"
+        }
+      },
+      {
+        "opt": {
+          "token": "mut"
+        }
+      },
+      {
+        "node": "Type"
+      }
+    ]
+  },
+  "SliceType": {
+    "seq": [
+      {
+        "token": "["
+      },
+      {
+        "node": "Type"
+      },
+      {
+        "token": "]"
+      }
+    ]
+  },
+  "TupleType": {
+    "seq": [
+      {
+        "token": "("
+      },
+      {
+        "label": "fields",
+        "rule": {
+          "opt": {
+            "seq": [
+              {
+                "node": "Type"
+              },
+              {
+                "rep": {
+                  "seq": [
+                    {
+                      "token": ","
+                    },
+                    {
+                      "node": "Type"
+                    }
+                  ]
+                }
+              },
+              {
+                "opt": {
+                  "token": ","
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "token": ")"
+      }
+    ]
+  },
+  "TypeBound": {
+    "alt": [
+      {
+        "node": "Lifetime"
+      },
+      {
+        "seq": [
+          {
+            "opt": {
+              "alt": [
+                {
+                  "token": "?"
+                },
+                {
+                  "seq": [
+                    {
+                      "token": "~"
+                    },
+                    {
+                      "token": "const"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "node": "Type"
+          }
+        ]
+      }
+    ]
+  },
+  "IdentPat": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "opt": {
+          "token": "ref"
+        }
+      },
+      {
+        "opt": {
+          "token": "mut"
+        }
+      },
+      {
+        "node": "Name"
+      },
+      {
+        "opt": {
+          "seq": [
+            {
+              "token": "@"
+            },
+            {
+              "node": "Pat"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "BoxPat": {
+    "seq": [
+      {
+        "token": "box"
+      },
+      {
+        "node": "Pat"
+      }
+    ]
+  },
+  "RestPat": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "token": ".."
+      }
+    ]
+  },
+  "LiteralPat": {
+    "seq": [
+      {
+        "opt": {
+          "token": "-"
+        }
+      },
+      {
+        "node": "Literal"
+      }
+    ]
+  },
+  "MacroPat": {
+    "node": "MacroCall"
+  },
+  "OrPat": {
+    "seq": [
+      {
+        "node": "Pat"
+      },
+      {
+        "rep": {
+          "seq": [
+            {
+              "token": "|"
+            },
+            {
+              "node": "Pat"
+            }
+          ]
+        }
+      },
+      {
+        "opt": {
+          "token": "|"
+        }
+      }
+    ]
+  },
+  "ParenPat": {
+    "seq": [
+      {
+        "token": "("
+      },
+      {
+        "node": "Pat"
+      },
+      {
+        "token": ")"
+      }
+    ]
+  },
+  "PathPat": {
+    "node": "Path"
+  },
+  "WildcardPat": {
+    "token": "_"
+  },
+  "RangePat": {
+    "alt": [
+      {
+        "seq": [
+          {
+            "label": "start",
+            "rule": {
+              "node": "Pat"
+            }
+          },
+          {
+            "label": "op",
+            "rule": {
+              "alt": [
+                {
+                  "token": ".."
+                },
+                {
+                  "token": "..="
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "seq": [
+          {
+            "label": "start",
+            "rule": {
+              "node": "Pat"
+            }
+          },
+          {
+            "label": "op",
+            "rule": {
+              "alt": [
+                {
+                  "token": ".."
+                },
+                {
+                  "token": "..="
+                }
+              ]
+            }
+          },
+          {
+            "label": "end",
+            "rule": {
+              "node": "Pat"
+            }
+          }
+        ]
+      },
+      {
+        "seq": [
+          {
+            "label": "op",
+            "rule": {
+              "alt": [
+                {
+                  "token": ".."
+                },
+                {
+                  "token": "..="
+                }
+              ]
+            }
+          },
+          {
+            "label": "end",
+            "rule": {
+              "node": "Pat"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "RecordPat": {
+    "seq": [
+      {
+        "node": "Path"
+      },
+      {
+        "node": "RecordPatFieldList"
+      }
+    ]
+  },
+  "RefPat": {
+    "seq": [
+      {
+        "token": "&"
+      },
+      {
+        "opt": {
+          "token": "mut"
+        }
+      },
+      {
+        "node": "Pat"
+      }
+    ]
+  },
+  "SlicePat": {
+    "seq": [
+      {
+        "token": "["
+      },
+      {
+        "opt": {
+          "seq": [
+            {
+              "node": "Pat"
+            },
+            {
+              "rep": {
+                "seq": [
+                  {
+                    "token": ","
+                  },
+                  {
+                    "node": "Pat"
+                  }
+                ]
+              }
+            },
+            {
+              "opt": {
+                "token": ","
+              }
+            }
+          ]
+        }
+      },
+      {
+        "token": "]"
+      }
+    ]
+  },
+  "TuplePat": {
+    "seq": [
+      {
+        "token": "("
+      },
+      {
+        "label": "fields",
+        "rule": {
+          "opt": {
+            "seq": [
+              {
+                "node": "Pat"
+              },
+              {
+                "rep": {
+                  "seq": [
+                    {
+                      "token": ","
+                    },
+                    {
+                      "node": "Pat"
+                    }
+                  ]
+                }
+              },
+              {
+                "opt": {
+                  "token": ","
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "token": ")"
+      }
+    ]
+  },
+  "TupleStructPat": {
+    "seq": [
+      {
+        "node": "Path"
+      },
+      {
+        "token": "("
+      },
+      {
+        "label": "fields",
+        "rule": {
+          "opt": {
+            "seq": [
+              {
+                "node": "Pat"
+              },
+              {
+                "rep": {
+                  "seq": [
+                    {
+                      "token": ","
+                    },
+                    {
+                      "node": "Pat"
+                    }
+                  ]
+                }
+              },
+              {
+                "opt": {
+                  "token": ","
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "token": ")"
+      }
+    ]
+  },
+  "ConstBlockPat": {
+    "seq": [
+      {
+        "token": "const"
+      },
+      {
+        "node": "BlockExpr"
+      }
+    ]
+  },
+  "RecordPatFieldList": {
+    "seq": [
+      {
+        "token": "{"
+      },
+      {
+        "label": "fields",
+        "rule": {
+          "opt": {
+            "seq": [
+              {
+                "node": "RecordPatField"
+              },
+              {
+                "rep": {
+                  "seq": [
+                    {
+                      "token": ","
+                    },
+                    {
+                      "node": "RecordPatField"
+                    }
+                  ]
+                }
+              },
+              {
+                "opt": {
+                  "token": ","
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "opt": {
+          "node": "RestPat"
+        }
+      },
+      {
+        "token": "}"
+      }
+    ]
+  },
+  "RecordPatField": {
+    "seq": [
+      {
+        "rep": {
+          "node": "Attr"
+        }
+      },
+      {
+        "opt": {
+          "seq": [
+            {
+              "node": "NameRef"
+            },
+            {
+              "token": ":"
+            }
+          ]
+        }
+      },
+      {
+        "node": "Pat"
+      }
+    ]
+  }
+}
