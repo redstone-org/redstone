@@ -100,9 +100,6 @@ impl<'a> GenerateSyntaxKinds<'a> {
             macro_rules! T {
                 #([#punctuation_values] => { $crate::SyntaxKind::#punctuations };)*
                  #([#reserved_keywords_values] => { $crate::SyntaxKind::#reserved_keywords };)*
-                [lifetime_ident] => { $crate::SyntaxKind::LIFETIME_IDENT };
-                [ident] => { $crate::SyntaxKind::IDENT };
-                [shebang] => { $crate::SyntaxKind::SHEBANG };
             }
         };
 
